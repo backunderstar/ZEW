@@ -3,7 +3,6 @@ package res
 import (
 	"net/http"
 
-	"github.com/backunderstar/zew/utils/validators"
 	"github.com/gin-gonic/gin"
 )
 
@@ -56,10 +55,7 @@ func Fail(data any, msg string, c *gin.Context) {
 func FailWithMsg(msg string, c *gin.Context) {
 	Result(Error, map[string]any{}, msg, c)
 }
-func FailWithValidateError[T any](err error, obj *T, c *gin.Context) {
-	msg := validators.GetValidMsg(err, obj)
-	FailWithMsg(msg, c)
-}
+
 func FailWithCode(code ErrorCode, c *gin.Context) {
 	msg, ok := ErrorMap[code]
 	if ok {
